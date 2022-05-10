@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app" class="flex justify-center items-center h-screen w-screen">
+    <div v-if="!isFinish && !isStart && !isWaiting && !isCountdown">
+      <div class="text-lg font-semibold">Question</div>
+      <div class="max-w-lg">{{ quiz[quizIndex] }}</div>
+      <div class="flex w-full items-center justify-center gap-8 mt-8">
+        <button class="rounded-lg bg-green-400 w-full py-2" @click="selectHandler(true)">TRUE</button>
+        <button class="rounded-lg bg-red-400 w-full py-2" @click="selectHandler(false)">FALSE</button>
+      </div>
+    </div>
+    <div v-if="isCountdown">
+      <div class="text-lg font-semibold">{{ counter }}</div>
+    </div>
+    <div v-if="isFinish">
+      <div class="text-lg font-semibold">FINISH</div>
+    </div>
+    <div v-if="isStart">
+      <div class="text-lg font-semibold">START</div>
+      <div class="flex w-full items-center justify-center gap-8 mt-8">
+        <button class="rounded-lg bg-red-400 w-full py-2" @click="startHandler">Start</button>
+      </div>
+    </div>
+    <div v-if="isWaiting">
+      <div class="text-lg font-semibold">WAITING</div>
+      <div class="flex w-full items-center justify-center gap-8 mt-8">
+        <button class="rounded-lg bg-red-400 w-full py-2" @click="revealQuiz">Start</button>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
